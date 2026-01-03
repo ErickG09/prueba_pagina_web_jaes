@@ -1,0 +1,129 @@
+/* Estilos base del sitio (los fondos están en la carpeta assets) */
+
+@font-face{
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Montserrat";
+  src: url("../assets/fonts/montserrat/Montserrat-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+/* Evita scroll horizontal */
+html{ overflow-x: hidden; scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #ffffff; /* Fondo blanco */
+  color: #111;
+  overflow-x: hidden; /* Evita desbordamiento*/
+}
+
+img{ max-width: 100%; display: block; }
+a{ color: inherit; text-decoration: none; }
+button{ font: inherit; }
+
+:root{
+  --container-max: 1180px;
+  --brand-red: #d02727;
+  --brand-red-2: #b81f1f;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --stitch: 2px;
+}
+
+/* Estado por defecto (sin JS): todo visible */
+.reveal{ opacity: 1; transform: none; filter: none; }
+.reveal-stagger > *{ opacity: 1; transform: none; filter: none; }
+
+/* Con JS: los bloques con .reveal inician ocultos  */
+html.js .reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(6px);
+  transition:
+    opacity 650ms var(--ease),
+    transform 650ms var(--ease),
+    filter 650ms var(--ease);
+  will-change: opacity, transform, filter;
+}
+
+/* Cuando JS marca que ya está visible (IntersectionObserver): aparece */
+html.js .reveal.is-in{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Reveal escalonado: se aplica a los hijos para entrada “en cascada” */
+html.js .reveal-stagger > *{
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(6px);
+  transition:
+    opacity 650ms var(--ease),
+    transform 650ms var(--ease),
+    filter 650ms var(--ease);
+}
+
+/* Cuando el contenedor tiene .is-in, sus hijos se muestran */
+html.js .reveal.is-in .reveal-stagger > *{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Delay por elemento */
+html.js .reveal.is-in .reveal-stagger > *:nth-child(1){ transition-delay: 80ms; }
+html.js .reveal.is-in .reveal-stagger > *:nth-child(2){ transition-delay: 160ms; }
+html.js .reveal.is-in .reveal-stagger > *:nth-child(3){ transition-delay: 240ms; }
+html.js .reveal.is-in .reveal-stagger > *:nth-child(4){ transition-delay: 320ms; }
+html.js .reveal.is-in .reveal-stagger > *:nth-child(5){ transition-delay: 400ms; }
+
+
+/* Estado por defecto (sin JS): visible */
+.hero-anim{ opacity: 1; transform: none; filter: none; }
+
+/* Con JS y al terminar el load: animación de entrada */
+html.js body.is-loaded .hero-anim{
+  animation: heroIn 700ms var(--ease) both;
+}
+
+/* Delays por elemento del hero (kicker, título, subtítulo) */
+html.js body.is-loaded .hero-anim--d1{ animation-delay: 90ms; }
+html.js body.is-loaded .hero-anim--d2{ animation-delay: 180ms; }
+html.js body.is-loaded .hero-anim--d3{ animation-delay: 280ms; }
+
+@keyframes heroIn{
+  from{ opacity: 0; transform: translateY(12px); filter: blur(8px); }
+  to{ opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+
+  html.js .reveal,
+  html.js .reveal-stagger > *{
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+
+  html.js body.is-loaded .hero-anim{ animation: none !important; }
+}

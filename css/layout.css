@@ -1,0 +1,10 @@
+/* Contenedor central:
+   - Limita el ancho del contenido
+   - Mantiene padding lateral consistente
+   - Se centra automáticamente
+*/
+.container{
+    /* Evita que el contenedor exceda el ancho máximo definido */
+  width: min(var(--container-max), calc(100% - 40px));
+  margin-inline: auto;
+}

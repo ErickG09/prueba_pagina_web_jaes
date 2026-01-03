@@ -169,10 +169,11 @@
   }
 }
 
+/* Modificación, subí el área del texto más arriba de las siguientes secciones: */
 @media (max-width: 820px){
   .hero__stage{
-    --safe-top: 40%;
-    --safe-bot: 70%;
+    --safe-top: 24%;
+    --safe-bot: 52%;
     --safe-x: 18px;
     --fs-kicker: 10.6px;
     --fs-muted:  clamp(22px, 6.8vw, 42px);
@@ -185,8 +186,8 @@
 
 @media (max-width: 560px){
   .hero__stage{
-    --safe-top: 42%;
-    --safe-bot: 80%;
+    --safe-top: 16%;
+    --safe-bot: 54%;
     --safe-x: 16px;
     --fs-kicker: 9.2px;
     --fs-muted:  clamp(17px, 5.2vw, 23px);
@@ -194,6 +195,7 @@
     --fs-bottom: clamp(19px, 6.4vw, 29px);
     --fs-sub:    10.2px;
   }
+  .hero__contentInner{ justify-content: flex-start; }
   .hero__subtitle br{ display: none; }
   .hero__kicker{ margin-bottom: 6px; letter-spacing: 0.6px; }
   .hero__subtitle{ margin-top: 6px; line-height: 1.16; }
@@ -202,8 +204,8 @@
 
 @media (max-width: 420px){
   .hero__stage{
-    --safe-top: 62%;
-    --safe-bot: 74%;
+    --safe-top: 18%;
+    --safe-bot: 56%;
     --safe-x: 14px;
     --fs-kicker: 8.7px;
     --fs-muted:  clamp(13.5px, 4.7vw, 19px);
@@ -216,5 +218,5 @@
 }
 
 @media (max-aspect-ratio: 3/4){
-  .hero__stage{ --safe-bot: 84%; }
+  .hero__stage{ --safe-bot: 58%; }
 }
